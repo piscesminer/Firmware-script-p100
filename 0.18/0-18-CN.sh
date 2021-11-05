@@ -25,7 +25,7 @@ sudo docker run -d --init \
 --name miner \
 --mount type=bind,source=/home/pi/hnt/miner,target=/var/data \
 --mount type=bind,source=/home/pi/hnt/script/update/1.08/sys.config,target=/config/sys.config \
-quay.io/team-helium/miner:miner-arm64_2021.10.29.0
+quay.io/team-helium/miner:miner-arm64_2021.10.29.0_GA
 
 wait
 echo "image update success";
