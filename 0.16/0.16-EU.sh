@@ -23,6 +23,6 @@ echo "version update"
 wait
 sudo rm -rf /home/pi/api/tool/version
 wait
-sudo wget https://piscesminer.oss-cn-hangzhou.aliyuncs.com/firmware/1.08/version -O /home/pi/api/tool/version;
+sudo wget https://piscesminer.oss-cn-hangzhou.aliyuncs.com/firmware/1.06/version -O /home/pi/api/tool/version;
 wait
 echo "update 1.06 success"
