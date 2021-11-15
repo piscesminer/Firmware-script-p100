@@ -40,13 +40,12 @@ echo "more details update"
 sudo curl http://127.0.0.1:8001/api/action/PacketOff
 wait
 echo "packet stop"
-wget  http://pisces-firmware.sidcloud.cn/0.21/EU/global_conf.json -O /home/pi/hnt/paket/paket/packet_forwarder/global_conf.json
+sudo wget  http://pisces-firmware.sidcloud.cn/0.21/EU/global_conf.json -O /home/pi/hnt/paket/paket/packet_forwarder/global_conf.json
 wait
-sudo curl http://127.0.0.1:8001/api/action/PacketOn
+sudo curl -o curl.log "http://127.0.0.1:8001/api/action/PacketRestart" --speed-time 5 --speed-limit 1
 echo "packet on"
+
 echo "version update"
-wait
-sudo rm -rf /home/pi/api/tool/version
 wait
 sudo wget http://pisces-firmware.sidcloud.cn/0.21/version -O /home/pi/api/tool/version;
 wait
