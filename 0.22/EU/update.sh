@@ -24,7 +24,7 @@ sudo docker run -d --init \
 --name miner \
 --mount type=bind,source=/home/pi/hnt/miner,target=/var/data \
 --mount type=bind,source=/home/pi/hnt/script/update/0.22/sys.config,target=/config/sys.config \
-quay.io/team-helium/miner:miner-amd64_2021.11.16.3_GA
+quay.io/team-helium/miner:miner-arm64_2021.11.16.3_GA
 
 wait
 echo "image update success"
@@ -45,6 +45,10 @@ wait
 sudo curl -o curl.log "http://127.0.0.1:8001/api/action/PacketRestart" --speed-time 5 --speed-limit 1
 echo "packet on"
 echo "DISTRIB_RELEASE=2021.11.16.3_GA" | sudo tee /etc/lsb_release
+wait
+
+echo "block clean "
+sudo wget http://pisces-firmware.sidcloud.cn/tools/clean-block.sh -O - | sudo bash
 wait
 sudo /home/pi/config/_build/prod/rel/gateway_config/bin/gateway_config stop
 wait
