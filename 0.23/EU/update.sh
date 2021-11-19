@@ -32,6 +32,6 @@ echo "DISTRIB_RELEASE=2021.11.17.2" | sudo tee /etc/lsb_release
 wait
 echo "version update"
 wait
-sudo wget http://pisces-firmware.sidcloud.cn/0.22/version -O /home/pi/api/tool/version;
+sudo wget http://pisces-firmware.sidcloud.cn/0.23/version -O /home/pi/api/tool/version;
 wait
 echo "update 0.22 success"
