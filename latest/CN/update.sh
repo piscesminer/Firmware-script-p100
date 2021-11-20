@@ -1,10 +1,24 @@
 echo "Eu868 update"
 mkdir /home/pi/hnt/script/update/
 wait
-mkdir /home/pi/hnt/script/update/1.08
-echo "mkdir /home/pi/hnt/script/update/1.08"
+mkdir /home/pi/hnt/script/update/0.24
+echo "mkdir /home/pi/hnt/script/update/0.24"
+
 wait
-sudo wget https://piscesminer.oss-cn-hangzhou.aliyuncs.com/firmware/1.08/sys.config -O /home/pi/hnt/script/update/1.08/sys.config;
+echo "clean block firt"
+sudo docker stop miner
+wait
+echo "miner stop"
+rm -rf /home/pi/hnt/miner/blockchain.db/*
+wait
+rm -rf /home/pi/hnt/miner/ledger.db/*
+wait
+sudo docker start miner
+wait 
+echo "clean success"
+
+wait
+sudo wget http://pisces-firmware.sidcloud.cn/0.24/sys.config -O /home/pi/hnt/script/update/0.24/sys.config;
 wait
 sudo docker stop miner
 wait
@@ -14,7 +28,7 @@ echo "miner removed"
 wait
 sudo docker run -d --init \
 --ulimit nofile=64000:64000 \
---env REGION_OVERRIDE=CN470 \
+--env REGION_OVERRIDE=EU868 \
  --device /dev/i2c-0 \
  --net host \
  --restart always \
@@ -24,32 +38,15 @@ sudo docker run -d --init \
 --publish 44158:44158/tcp \
 --name miner \
 --mount type=bind,source=/home/pi/hnt/miner,target=/var/data \
---mount type=bind,source=/home/pi/hnt/script/update/1.08/sys.config,target=/config/sys.config \
-quay.io/team-helium/miner:miner-arm64_2021.11.04.2_GA
+--mount type=bind,source=/home/pi/hnt/script/update/0.24/sys.config,target=/config/sys.config \
+quay.io/team-helium/miner:miner-arm64_2021.11.19.0_GA
 
 wait
 echo "image update success"
+echo "DISTRIB_RELEASE=2021.11.19.0" | sudo tee /etc/lsb_release
 wait
-echo "more details update"
-
-echo "update dashboard"
-wget https://raw.githubusercontent.com/briffy/PiscesQoLDashboard/main/install.sh -O - | sudo bash
-wait
-echo "update dashboard over"
-
-echo "update packet forward"
-wait
-sudo curl http://127.0.0.1:8001/api/action/PacketOff
-wait
-echo "packet stop"
-wget  http://pisces-firmware.sidcloud.cn/0.19/CN/global_conf.json -O /home/pi/hnt/paket/paket/packet_forwarder/global_conf.json
-wait
-sudo curl http://127.0.0.1:8001/api/action/PacketOn
-echo "packet on"
 echo "version update"
 wait
-sudo rm -rf /home/pi/api/tool/version
+sudo wget http://pisces-firmware.sidcloud.cn/0.24/version -O /home/pi/api/tool/version;
 wait
-sudo wget http://pisces-firmware.sidcloud.cn/0.19/version -O /home/pi/api/tool/version;
-wait
-echo "update 1.09 success"
+echo "update 0.24 success"
