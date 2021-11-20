@@ -28,7 +28,7 @@ echo "miner removed"
 wait
 sudo docker run -d --init \
 --ulimit nofile=64000:64000 \
---env REGION_OVERRIDE=EU868 \
+--env REGION_OVERRIDE=CN470 \
  --device /dev/i2c-0 \
  --net host \
  --restart always \
@@ -49,4 +49,4 @@ echo "version update"
 wait
 sudo wget http://pisces-firmware.sidcloud.cn/0.24/version -O /home/pi/api/tool/version;
 wait
-echo "update 0.24 success"
+echo "update 0.23 success"
