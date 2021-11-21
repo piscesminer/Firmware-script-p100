@@ -28,7 +28,7 @@ echo "miner removed"
 wait
 sudo docker run -d --init \
 --ulimit nofile=64000:64000 \
---env REGION_OVERRIDE=EU868 \
+--env REGION_OVERRIDE=CN470 \
  --device /dev/i2c-0 \
  --net host \
  --restart always \
