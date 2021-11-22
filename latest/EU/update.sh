@@ -9,9 +9,9 @@ echo "clean block firt"
 sudo docker stop miner
 wait
 echo "miner stop"
-rm -rf /home/pi/hnt/miner/blockchain.db/*
+rm -rf /home/pi/hnt/miner/blockchain.db
 wait
-rm -rf /home/pi/hnt/miner/ledger.db/*
+rm -rf /home/pi/hnt/miner/ledger.db
 wait
 sudo docker start miner
 wait 
@@ -38,7 +38,7 @@ sudo docker run -d --init \
 --publish 44158:44158/tcp \
 --name miner \
 --mount type=bind,source=/home/pi/hnt/miner,target=/var/data \
---mount type=bind,source=/home/pi/hnt/script/update/0.24/sys.config,target=/config/sys.config \
+--mount type=bind,source=/home/pi/hnt/script/update/0.25/sys.config,target=/config/sys.config \
 quay.io/team-helium/miner:miner-arm64_2021.11.21.1_GA
 
 wait

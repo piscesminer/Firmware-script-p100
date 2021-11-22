@@ -1,4 +1,4 @@
-echo "Eu868 update"
+echo "AS923 update"
 mkdir /home/pi/hnt/script/update/
 wait
 mkdir /home/pi/hnt/script/update/0.25
@@ -28,7 +28,7 @@ echo "miner removed"
 wait
 sudo docker run -d --init \
 --ulimit nofile=64000:64000 \
---env REGION_OVERRIDE=EU868 \
+--env REGION_OVERRIDE=AS923 \
  --device /dev/i2c-0 \
  --net host \
  --restart always \
