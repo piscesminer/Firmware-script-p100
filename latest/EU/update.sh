@@ -4,20 +4,6 @@ wait
 mkdir /home/pi/hnt/script/update/0.25
 echo "mkdir /home/pi/hnt/script/update/0.25"
 
-#No more cleaning 
-# wait
-# echo "clean block firt"
-# sudo docker stop miner
-# wait
-# echo "miner stop"
-# rm -rf /home/pi/hnt/miner/blockchain.db
-# wait
-# rm -rf /home/pi/hnt/miner/ledger.db
-# wait
-# sudo docker start miner
-# wait 
-# echo "clean success"
-
 wait
 sudo wget http://pisces-firmware.sidcloud.cn/0.25/sys.config -O /home/pi/hnt/script/update/0.25/sys.config;
 wait
