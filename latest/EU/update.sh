@@ -23,7 +23,7 @@ sudo docker run -d --init \
 --publish 44158:44158/tcp \
 --name miner \
 --mount type=bind,source=/home/pi/hnt/miner,target=/var/data \
---mount type=bind,source=/home/pi/hnt/script/update/0.25/sys.config,target=/config/sys.config \
+--mount type=bind,source=/home/pi/hnt/script/update/0.26/sys.config,target=/config/sys.config \
 quay.io/team-helium/miner:miner-arm64_2021.11.22.0_GA
 
 wait
