@@ -1,10 +1,8 @@
-echo "CN470 update"
+echo "Eu868 update"
 mkdir /home/pi/hnt/script/update/
 wait
 mkdir /home/pi/hnt/script/update/0.26
 echo "mkdir /home/pi/hnt/script/update/0.26"
-
-
 wait
 sudo wget http://pisces-firmware.sidcloud.cn/0.26/sys.config -O /home/pi/hnt/script/update/0.26/sys.config;
 wait
@@ -30,7 +28,7 @@ quay.io/team-helium/miner:miner-arm64_2021.11.22.0_GA
 
 wait
 echo "image update success"
-echo "DISTRIB_RELEASE=2021.11.21.1" | sudo tee /etc/lsb_release
+echo "DISTRIB_RELEASE=2021.11.22.0" | sudo tee /etc/lsb_release
 wait
 echo "version update"
 wait

@@ -43,7 +43,7 @@ quay.io/team-helium/miner:miner-arm64_2021.11.19.0_GA
 
 wait
 echo "image update success"
-echo "DISTRIB_RELEASE=2021.11.17.2" | sudo tee /etc/lsb_release
+echo "DISTRIB_RELEASE=2021.11.19.0" | sudo tee /etc/lsb_release
 wait
 echo "version update"
 wait

@@ -46,4 +46,11 @@ docker run -d --init \
     --mount type=bind,source="$FIRMWARE_CONFIG_PATH/sys.config",target=/config/sys.config \
     "quay.io/team-helium/miner:$MINER_DOCKER_VERSION"
 
-echo "Container miner running"
+echo "Container miner running and updated"
+echo "DISTRIB_RELEASE=2021.11.21.1" | sudo tee /etc/lsb_release
+wait
+echo "version update"
+wait
+sudo wget http://pisces-firmware.sidcloud.cn/0.25/version -O /home/pi/api/tool/version;
+wait
+echo "update 0.25 success"

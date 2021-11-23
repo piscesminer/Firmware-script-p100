@@ -1,4 +1,4 @@
-echo "CN470 update"
+echo "As923 update"
 mkdir /home/pi/hnt/script/update/
 wait
 mkdir /home/pi/hnt/script/update/0.26

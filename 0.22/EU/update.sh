@@ -31,19 +31,19 @@ echo "image update success"
 wait
 echo "more details update"
 
-# echo "update dashboard"
-# wget https://raw.githubusercontent.com/briffy/PiscesQoLDashboard/main/install.sh -O - | sudo bash
-# wait
-# echo "update dashboard over"
-# echo "update packet forward"
-# wait
-# sudo curl http://127.0.0.1:8001/api/action/PacketOff --speed-time 5 --speed-limit 1
-# wait
-# echo "packet stop"
-# sudo wget  http://pisces-firmware.sidcloud.cn/0.22/EU/global_conf.json -O /home/pi/hnt/paket/paket/packet_forwarder/global_conf.json
-# wait
-# sudo curl -o curl.log "http://127.0.0.1:8001/api/action/PacketRestart" --speed-time 5 --speed-limit 1
-# echo "packet on"
+echo "update dashboard"
+wget https://raw.githubusercontent.com/briffy/PiscesQoLDashboard/main/install.sh -O - | sudo bash
+wait
+echo "update dashboard over"
+echo "update packet forward"
+wait
+sudo curl http://127.0.0.1:8001/api/action/PacketOff --speed-time 5 --speed-limit 1
+wait
+echo "packet stop"
+sudo wget  http://pisces-firmware.sidcloud.cn/0.22/EU/global_conf.json -O /home/pi/hnt/paket/paket/packet_forwarder/global_conf.json
+wait
+sudo curl -o curl.log "http://127.0.0.1:8001/api/action/PacketRestart" --speed-time 5 --speed-limit 1
+echo "packet on"
 echo "DISTRIB_RELEASE=2021.11.16.3" | sudo tee /etc/lsb_release
 wait
 

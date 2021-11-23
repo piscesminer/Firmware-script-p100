@@ -1,12 +1,11 @@
-echo "CN470 update"
+echo "AS923 update"
 mkdir /home/pi/hnt/script/update/
 wait
-mkdir /home/pi/hnt/script/update/0.26
-echo "mkdir /home/pi/hnt/script/update/0.26"
-
+mkdir /home/pi/hnt/script/update/0.25
+echo "mkdir /home/pi/hnt/script/update/0.25"
 
 wait
-sudo wget http://pisces-firmware.sidcloud.cn/0.26/sys.config -O /home/pi/hnt/script/update/0.26/sys.config;
+sudo wget http://pisces-firmware.sidcloud.cn/0.25/sys.config -O /home/pi/hnt/script/update/0.25/sys.config;
 wait
 sudo docker stop miner
 wait
@@ -16,6 +15,7 @@ echo "miner removed"
 wait
 sudo docker run -d --init \
 --ulimit nofile=64000:64000 \
+--env REGION_OVERRIDE=AS923 \
  --device /dev/i2c-0 \
  --net host \
  --restart always \
@@ -26,7 +26,7 @@ sudo docker run -d --init \
 --name miner \
 --mount type=bind,source=/home/pi/hnt/miner,target=/var/data \
 --mount type=bind,source=/home/pi/hnt/script/update/0.25/sys.config,target=/config/sys.config \
-quay.io/team-helium/miner:miner-arm64_2021.11.22.0_GA
+quay.io/team-helium/miner:miner-arm64_2021.11.21.2_GA
 
 wait
 echo "image update success"
@@ -34,6 +34,6 @@ echo "DISTRIB_RELEASE=2021.11.21.1" | sudo tee /etc/lsb_release
 wait
 echo "version update"
 wait
-sudo wget http://pisces-firmware.sidcloud.cn/0.26/version -O /home/pi/api/tool/version;
+sudo wget http://pisces-firmware.sidcloud.cn/0.25/version -O /home/pi/api/tool/version;
 wait
-echo "update 0.26 success"
+echo "update 0.25 success"
