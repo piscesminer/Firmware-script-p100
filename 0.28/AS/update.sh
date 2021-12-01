@@ -9,7 +9,7 @@ FIRMWARE_VERSION="0.27"
 FIRMWARE_CONFIG_PATH="/home/pi/hnt/script/update/$FIRMWARE_VERSION"
 MINER_DOCKER_VERSION="miner-arm64_2021.11.30.1_GA"
 
-echo "update $FIRMWARE_VERSION"
+echo "Eu868 update $FIRMWARE_VERSION"
 
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root" 

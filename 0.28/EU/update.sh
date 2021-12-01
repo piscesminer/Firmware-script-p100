@@ -5,11 +5,11 @@ set -x
 # Exit with error if some command fails
 set -e
 
-FIRMWARE_VERSION="0.27"
-FIRMWARE_CONFIG_PATH="/home/pi/hnt/script/update/$FIRMWARE_VERSION"
+FIRMWARE_VERSION="0.28"
+FIRMWARE_CONFIG_PATH="/home/pi/hnt/miner/configs/"
 MINER_DOCKER_VERSION="miner-arm64_2021.11.30.1_GA"
 
-echo "update $FIRMWARE_VERSION"
+echo "Eu868 update $FIRMWARE_VERSION"
 
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root" 
@@ -41,9 +41,9 @@ docker run -d --init \
     --privileged \
     -v /var/run/dbus:/var/run/dbus \
     --name miner \
-    --publish 1680:1680/udp \
-    --publish 44158:44158/tcp \
+    --publish 127.0.0.1:1680:1680/udp --publish 44158:44158/tcp
     --mount type=bind,source=/home/pi/hnt/miner,target=/var/data \
+    --mount type=bind,source=/home/pi/hnt/miner/log,target=/var/log/miner
     --mount type=bind,source="$FIRMWARE_CONFIG_PATH/sys.config",target=/config/sys.config \
     "quay.io/team-helium/miner:$MINER_DOCKER_VERSION"
 
