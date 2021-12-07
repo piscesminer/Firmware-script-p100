@@ -26,22 +26,23 @@ curl -Lf "http://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/sys.config" -o "$
 docker stop miner || true 
 docker rm miner || true 
 
-echo "Cleaning blocks"
-rm -rf "/home/pi/hnt/miner/blockchain.db/*"
-rm -rf "/home/pi/hnt/miner/ledger.db/*"
+# echo "Cleaning blocks"
+# rm -rf "/home/pi/hnt/miner/blockchain.db/*"
+# rm -rf "/home/pi/hnt/miner/ledger.db/*"
 
 echo "Running $MINER_DOCKER_VERSION image"
 
 # As it runs with "host" network no need to expose ports
 docker run -d --init \
     --ulimit nofile=64000:64000 \
+    --env REGION_OVERRIDE=EU868 \
     --device /dev/i2c-0 \
     --net host \
     --restart always \
     --privileged \
     -v /var/run/dbus:/var/run/dbus \
     --name miner \
-    --publish 127.0.0.1:1680:1680/udp \
+    --publish 1680:1680/udp \
     --publish 44158:44158/tcp \
     --mount type=bind,source=/home/pi/hnt/miner,target=/var/data \
     --mount type=bind,source=/home/pi/hnt/miner/log,target=/var/log/miner \
