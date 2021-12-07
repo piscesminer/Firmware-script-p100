@@ -26,9 +26,9 @@ curl -Lf "http://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/sys.config" -o "$
 docker stop miner || true 
 docker rm miner || true 
 
-echo "Cleaning blocks"
-rm -rf "/home/pi/hnt/miner/blockchain.db/*"
-rm -rf "/home/pi/hnt/miner/ledger.db/*"
+# echo "Cleaning blocks"
+# rm -rf "/home/pi/hnt/miner/blockchain.db/*"
+# rm -rf "/home/pi/hnt/miner/ledger.db/*"
 
 echo "Running $MINER_DOCKER_VERSION image"
 
