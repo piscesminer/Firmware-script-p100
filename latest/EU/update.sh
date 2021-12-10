@@ -17,11 +17,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-mkdir -p "$FIRMWARE_CONFIG_PATH"
-
-# Download config first to avoid stopping container if fails
-# Do not write sys.config if 404 error
-curl -Lf "http://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/sys.config" -o "$FIRMWARE_CONFIG_PATH/sys.config"
 
 
 
@@ -34,6 +29,12 @@ SYSTEM=`sudo docker ps --format "{{.Image}}" --filter "name=miner" | grep -Po "m
 if [ $SYSTEM = $MINER_DOCKER_VERSION ] ; then 
 echo "❌Aleady update... Skip"
 else
+
+mkdir -p "$FIRMWARE_CONFIG_PATH"
+
+# Download config first to avoid stopping container if fails
+# Do not write sys.config if 404 error
+curl -Lf "http://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/sys.config" -o "$FIRMWARE_CONFIG_PATH/sys.config"
 
 # Stop miner container if already started
     docker stop miner || true 
