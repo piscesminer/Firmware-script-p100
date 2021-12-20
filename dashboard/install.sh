@@ -1,22 +1,26 @@
 #!/bin/bash
+userdel admin2
+userdel admin
+groupdel admin
+groupdel admin2
+rm -rf /home/admin
+rm -rf /home/admin2
 
-if ! id "admin" &> /dev/null; then
-  adduser --disabled-password --gecos "" admin
-  echo admin:admin | chpasswd
-  usermod admin -g sudo
-fi
+adduser --disabled-password --gecos "" admin
+echo admin:admin | chpasswd
+usermod admin -g sudo
 
 
 if id -nG admin | grep -qw "sudo"; then
-  wget https://pisces-firmware.sidcloud.cn/dashboar/latest.tar.gz -O /tmp/latest.tar.gz
+  wget https://raw.githubusercontent.com/briffy/PiscesQoLDashboard/main/latest.tar.gz -O /tmp/latest.tar.gz
   cd /tmp
   if test -f latest.tar.gz; then
     tar -xzf latest.tar.gz
     cd dashboardinstall
     systemctl stop pm2-pi.service
     systemctl disable pm2-pi.service
-
-    apt-get --assume-yes install nginx php-fpm php7.3-fpm lm-sensors
+    apt-get update
+    apt-get --assume-yes install nginx php-fpm php7.3-fpm pptp-linux openvpn
 
     mkdir /var/dashboard
     mkdir /etc/monitor-scripts
@@ -26,16 +30,20 @@ if id -nG admin | grep -qw "sudo"; then
     cp nginx/certs/nginx-selfsigned.crt /etc/ssl/certs/
     cp nginx/certs/nginx-selfsigned.key /etc/ssl/private/
     cp nginx/snippets/* /etc/nginx/snippets/
-    cp nginx/default /etc/nginx/sites-enabled/
-    cp nginx/.htpasswd /var/dashboard/.htpasswd
+    cp nginx/default /etc/nginx/sites-enabled
+    if ! test -f /var/dashboard/.htpasswd; then
+      cp nginx/.htpasswd /var/dashboard/.htpasswd
+    fi
     cp nginx/dhparam.pem /etc/ssl/certs/dhparam.pem
     cp systemd/* /etc/systemd/system/
 
     chmod 755 /etc/monitor-scripts/*
     chown root:www-data /var/dashboard/services/*
     chown root:www-data /var/dashboard/statuses/*
+    chown root:www-data /var/dashboard/vpn/*
     chmod 775 /var/dashboard/services/*
     chmod 775 /var/dashboard/statuses/*
+    chmod 775 /var/dashboard/vpn/*
     chown root:root /etc/ssl/private/nginx-selfsigned.key
     chmod 600 /etc/ssl/private/nginx-selfsigned.key
     chown root:root /etc/ssl/certs/nginx-selfsigned.crt
