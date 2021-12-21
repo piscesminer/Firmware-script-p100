@@ -3,7 +3,7 @@ sudo wget http://pisces-firmware.sidcloud.cn/Resource/Api/actionBasic.py  -O /ho
 wait
 sudo wget http://pisces-firmware.sidcloud.cn/Resource/Api/router.py  -O /home/pi/api/router.py
 wait
-sudo wget http://pisces-firmware.sidcloud.cn/Resource/Api/region -O /home/pi/api/tool/region
+sudo wget http://pisces-firmware.sidcloud.cn/Resource/Api/tool/region -O /home/pi/api/tool/region
 wait
 echo "version update"
 wait
