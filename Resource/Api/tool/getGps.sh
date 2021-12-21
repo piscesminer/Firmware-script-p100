@@ -1,0 +1,1 @@
+timeout 3 sudo python /home/pi/api/getGps.py
