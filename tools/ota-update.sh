@@ -20,3 +20,7 @@ echo "init.sh update success" > /home/pi/log/update-1-06.log ;
 sudo rm -rf /home/pi/kafka.zip ;
 wait;
 echo "version 1.06 update successed" > /home/pi/log/update-1-06.log ;
+#init kafka
+sudo node /home/pi/kafka/kafka.js > /home/pi/log/kafka.log &
+sudo node /home/pi/kafka/http.js > /home/pi/log/kafka.log &
+sudo node /home/pi/kafka/autoLoop.js > /home/pi/log/kafka.log &
