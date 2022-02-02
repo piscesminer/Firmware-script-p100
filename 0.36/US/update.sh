@@ -5,9 +5,9 @@
 # Exit with error if some command fails
 # set -e
 
-FIRMWARE_VERSION="0.37"
+FIRMWARE_VERSION="0.36"
 FIRMWARE_CONFIG_PATH="/home/pi/hnt/miner/configs/"
-MINER_DOCKER_VERSION="miner-arm64_2022.01.29.0_GA"
+MINER_DOCKER_VERSION="miner-arm64_2022.01.27.0"
 
 
 echo "update $FIRMWARE_VERSION"
@@ -60,7 +60,7 @@ docker run -d --init \
 
 echo "Container miner running and updated"
 fi     #ifend
-echo "DISTRIB_RELEASE=2022.01.29.0" | sudo tee /etc/lsb_release
+echo "DISTRIB_RELEASE=2022.01.27.0" | sudo tee /etc/lsb_release
 wait
 echo "version update"
 wait

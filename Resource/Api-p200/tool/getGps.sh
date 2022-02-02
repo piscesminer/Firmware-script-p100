@@ -1,0 +1,1 @@
+timeout 3 sudo python userdata/api/getGps.py
