@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "start mount"
+mount /dev/mmcblk0p8 /userdata
+insmod /system/lib/modules/8723ds.ko
+insmod /usr/lib/modules/hci_uart.ko
+mount /dev/mmcblk1p2 /sdcard
+sudo bash /userdata/tool/onPacket.sh &
