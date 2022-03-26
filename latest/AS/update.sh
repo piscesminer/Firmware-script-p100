@@ -7,7 +7,7 @@
 
 FIRMWARE_VERSION="0.41"
 FIRMWARE_CONFIG_PATH="/home/pi/hnt/miner/configs/"
-MINER_DOCKER_VERSION="miner-amd64_2022.03.23.1_GA"
+MINER_DOCKER_VERSION="miner-arm64_2022.03.23.1_GA"
 
 
 echo "update $FIRMWARE_VERSION"
