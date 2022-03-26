@@ -5,9 +5,9 @@
 # Exit with error if some command fails
 # set -e
 
-FIRMWARE_VERSION="0.40"
+FIRMWARE_VERSION="0.41"
 FIRMWARE_CONFIG_PATH="/home/pi/hnt/miner/configs/"
-MINER_DOCKER_VERSION="miner-arm64_2022.03.07.0_GA"
+MINER_DOCKER_VERSION="miner-amd64_2022.03.23.1_GA"
 
 
 echo "update $FIRMWARE_VERSION"
