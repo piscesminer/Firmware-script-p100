@@ -2,7 +2,7 @@
     "version":0.51,
     "docker_version":"miner-arm64_2022.06.02.1_GA",
     "heliium_latest":{
-        "version":0.51,
-        "docker version":"miner-arm64_2022.06.02.1_GA"
+        "version":0.52,
+        "docker version":"miner-arm64_2022.06.09.0_GA"
     }
 }
