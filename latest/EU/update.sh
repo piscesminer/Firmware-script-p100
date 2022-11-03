@@ -5,9 +5,9 @@
 # Exit with error if some command fails
 # set -e
 
-FIRMWARE_VERSION="0.55"
+FIRMWARE_VERSION="0.56"
 FIRMWARE_CONFIG_PATH="/home/pi/hnt/miner/configs/"
-MINER_DOCKER_VERSION="miner-arm64_2022.08.17.1_GA"
+MINER_DOCKER_VERSION="miner-arm64_2022.10.28.0_GA"
 
 
 echo "update $FIRMWARE_VERSION"
@@ -24,6 +24,7 @@ fi
 # echo "Cleaning blocks"
 # rm -rf "/home/pi/hnt/miner/blockchain.db/*"
 # rm -rf "/home/pi/hnt/miner/ledger.db/*"
+curl -Lf "http://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/sys.config" -o "$FIRMWARE_CONFIG_PATH/sys.config"
 
 SYSTEM=`sudo docker ps --format "{{.Image}}" --filter "name=miner" | grep -Po "miner-arm64_.*"`
 if [ $SYSTEM = $MINER_DOCKER_VERSION ] ; then 
@@ -34,7 +35,6 @@ mkdir -p "$FIRMWARE_CONFIG_PATH"
 
 # Download config first to avoid stopping container if fails
 # Do not write sys.config if 404 error
-curl -Lf "http://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/sys.config" -o "$FIRMWARE_CONFIG_PATH/sys.config"
 
 # Stop miner container if already started
     docker stop miner || true 
@@ -60,7 +60,7 @@ docker run -d --init \
 
 echo "Container miner running and updated"
 fi     #ifend
-echo "DISTRIB_RELEASE=2022.08.17.0" | sudo tee /etc/lsb_release
+echo "DISTRIB_RELEASE=2022.10.28.0" | sudo tee /etc/lsb_release
 wait
 echo "version update"
 wait
