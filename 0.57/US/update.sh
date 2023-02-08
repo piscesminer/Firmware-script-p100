@@ -60,7 +60,7 @@ docker run -d --init \
 
 echo "Container miner running and updated"
 fi     #ifend
-echo "DISTRIB_RELEASE=2022.08.17.0" | sudo tee /etc/lsb_release
+echo "DISTRIB_RELEASE=2022.12.13.0" | sudo tee /etc/lsb_release
 wait
 echo "version update"
 wait
