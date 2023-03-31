@@ -1,0 +1,7 @@
+#helium_gateay.service
+[Unit]
+Description= helium gateway
+
+[Service]
+type=forking
+ExecStart=/root/update/helium_gateway server

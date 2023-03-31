@@ -5,7 +5,7 @@
 # Exit with error if some command fails
 # set -e
 
-FIRMWARE_VERSION="0.58"
+FIRMWARE_VERSION="0.59"
 FIRMWARE_CONFIG_PATH="/home/pi/hnt/miner/configs/"
 MINER_DOCKER_VERSION="miner-arm64_2023.02.07.0_GA"
 
