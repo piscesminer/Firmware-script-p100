@@ -36,8 +36,8 @@ tar -xvf "$GATEWAY_RS_PATH/helium-gateway-1.0.0-armv7-unknown-linux-musleabihf.t
 wait
 
 # Download config
-wget "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_REGION/setting.toml" -o "$GATEWAY_RS_PATH/setting.toml"
-echo "🍺 fetch https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_REGION/setting.toml to $GATEWAY_RS_PATH/setting.toml"
+curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_REGION/settings.toml" -o "$GATEWAY_RS_PATH/settings.toml"
+echo "🍺 fetch https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_REGION/settings.toml to $GATEWAY_RS_PATH/settings.toml"
 # export PATH=/root/update/:$PATH
 
 # Download the service 
