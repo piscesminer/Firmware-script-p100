@@ -44,8 +44,7 @@ echo "🍺 fetch https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_
 curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/helium.service" -O "/lib/systemd/system/helium.service"
 
 # Update the init
-curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/init.sh" -O "/home/pi/hnt/script/init.sh"
-
+curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/init.sh" -o "/home/pi/hnt/script/init.sh"
 
 # Stop miner container if already started
     docker stop miner || true 

@@ -7,7 +7,7 @@
 
 FIRMWARE_VERSION="0.60"
 GATEWAY_RS_PATH="/etc/helium_gateway"
-GATEWAY_REGION="EU"
+GATEWAY_REGION="CN"
 
 echo "update $FIRMWARE_VERSION"
 
@@ -44,8 +44,7 @@ echo "🍺 fetch https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_
 curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/helium.service" -O "/lib/systemd/system/helium.service"
 
 # Update the init
-curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/init.sh" -O "/home/pi/hnt/script/init.sh"
-
+curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/init.sh" -o "/home/pi/hnt/script/init.sh"
 
 # Stop miner container if already started
     docker stop miner || true 
