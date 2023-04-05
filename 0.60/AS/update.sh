@@ -7,7 +7,7 @@
 
 FIRMWARE_VERSION="0.60"
 GATEWAY_RS_PATH="/etc/helium_gateway"
-GATEWAY_REGION="EU"
+GATEWAY_REGION="AS"
 
 echo "update $FIRMWARE_VERSION"
 
