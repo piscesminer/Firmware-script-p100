@@ -1,8 +1,8 @@
 {
-    "version":0.54,
-    "docker_version":"miner-arm64_2022.08.02.0_GA",
+    "version":0.60,
+    "docker_version":"gateway_mfr_v1.00",
     "heliium_latest":{
-        "version":0.54,
-        "docker version":"miner-arm64_2022.08.02.0_GA"
+        "version":0.60,
+        "docker version":"gateway_mfr_v1.00"
     }
 }

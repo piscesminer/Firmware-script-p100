@@ -5,10 +5,9 @@
 # Exit with error if some command fails
 # set -e
 
-FIRMWARE_VERSION="0.59"
-FIRMWARE_CONFIG_PATH="/home/pi/hnt/miner/configs/"
-MINER_DOCKER_VERSION="miner-arm64_2023.02.07.0_GA"
-
+FIRMWARE_VERSION="0.60"
+GATEWAY_RS_PATH="/etc/helium_gateway"
+GATEWAY_REGION="EU"
 
 echo "update $FIRMWARE_VERSION"
 
@@ -24,46 +23,50 @@ fi
 # echo "Cleaning blocks"
 # rm -rf "/home/pi/hnt/miner/blockchain.db/*"
 # rm -rf "/home/pi/hnt/miner/ledger.db/*"
+mkdir -p "$GATEWAY_RS_PATH/"
+echo "🍺 mkdir $GATEWAY_RS_PATH/"
+rm -rf $GATEWAY_RS_PATH/*
+echo "🍺rm -rf $GATEWAY_RS_PATH/*"
 
-SYSTEM=`sudo docker ps --format "{{.Image}}" --filter "name=miner" | grep -Po "miner-arm64_.*"`
-if [ $SYSTEM = $MINER_DOCKER_VERSION ] ; then 
-echo "❌Aleady update... Skip"
-else
+# Download the gateway_rs programe
+wget "https://github.com/helium/gateway-rs/releases/download/v1.0.0/helium-gateway-1.0.0-armv7-unknown-linux-musleabihf.tar.gz" -P "$GATEWAY_RS_PATH/"
+wait
+# Unzip the pack
+tar -xvf "$GATEWAY_RS_PATH/helium-gateway-1.0.0-armv7-unknown-linux-musleabihf.tar.gz" -C "$GATEWAY_RS_PATH/"
+wait
 
-mkdir -p "$FIRMWARE_CONFIG_PATH"
+# Download config
+wget "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_REGION/settings.toml" -O "$GATEWAY_RS_PATH/settings.toml"
+echo "🍺 fetch https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_REGION/settings.toml to $GATEWAY_RS_PATH/settings.toml"
+# export PATH=/root/update/:$PATH
 
-# Download config first to avoid stopping container if fails
-# Do not write sys.config if 404 error
-curl -Lf "http://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/sys.config" -o "$FIRMWARE_CONFIG_PATH/sys.config"
+# Download the service 
+curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/helium.service" -O "/lib/systemd/system/helium.service"
+
+# Update the init
+curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/init.sh" -O "/home/pi/hnt/script/init.sh"
+
 
 # Stop miner container if already started
     docker stop miner || true 
     docker rm miner || true 
 
-echo "🍺Running $MINER_DOCKER_VERSION image"
+    systemctl daemon-reload
+# Stop the service of helium
+    service helium stop 
 
-# As it runs with "host" network no need to expose ports
-docker run -d --init \
-    --ulimit nofile=64000:64000 \
-    --device /dev/i2c-0 \
-    --net host \
-    --restart always \
-    --privileged \
-    -v /var/run/dbus:/var/run/dbus \
-    --name miner \
-    --publish 127.0.0.1:1680:1680/udp \
-    --publish 44158:44158/tcp \
-    --mount type=bind,source=/home/pi/hnt/miner,target=/var/data \
-    --mount type=bind,source=/home/pi/hnt/miner/log,target=/var/log/miner \
-    --mount type=bind,source="$FIRMWARE_CONFIG_PATH/sys.config",target=/config/sys.config \
-    "quay.io/team-helium/miner:$MINER_DOCKER_VERSION"
+# Start up the service
+    service helium start
 
-echo "Container miner running and updated"
-fi     #ifend
-echo "DISTRIB_RELEASE=2023.02.07" | sudo tee /etc/lsb_release
+echo "Helium_gateway running and updated"
+
+# Update the lsb_release file
+echo "DISTRIB_RELEASE=2023.03.30" | sudo tee /etc/lsb_release
 wait
 echo "version update"
 wait
+
+# Update the version file
 sudo wget http://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/version -O /home/pi/api/tool/version;
 wait
 echo "update $FIRMWARE_VERSION success"

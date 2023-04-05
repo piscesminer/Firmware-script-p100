@@ -7,7 +7,7 @@
 
 FIRMWARE_VERSION="0.60"
 GATEWAY_RS_PATH="/etc/helium_gateway"
-GATEWAY_REGION="US"
+GATEWAY_REGION="EU"
 
 echo "update $FIRMWARE_VERSION"
 
@@ -36,15 +36,15 @@ tar -xvf "$GATEWAY_RS_PATH/helium-gateway-1.0.0-armv7-unknown-linux-musleabihf.t
 wait
 
 # Download config
-wget "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_REGION/setting.toml" -o "$GATEWAY_RS_PATH/setting.toml"
-echo "🍺 fetch https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_REGION/setting.toml to $GATEWAY_RS_PATH/setting.toml"
+wget "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_REGION/settings.toml" -O "$GATEWAY_RS_PATH/settings.toml"
+echo "🍺 fetch https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_REGION/settings.toml to $GATEWAY_RS_PATH/settings.toml"
 # export PATH=/root/update/:$PATH
 
 # Download the service 
-curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/helium.service" -o "/lib/systemd/system/helium.service"
+curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/helium.service" -O "/lib/systemd/system/helium.service"
 
 # Update the init
-curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/init.sh" -o "/home/pi/hnt/script/init.sh"
+curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/init.sh" -O "/home/pi/hnt/script/init.sh"
 
 
 # Stop miner container if already started
