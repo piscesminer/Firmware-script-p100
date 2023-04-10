@@ -41,7 +41,7 @@ echo "🍺 fetch https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/$GATEWAY_
 # export PATH=/root/update/:$PATH
 
 # Download the service 
-curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/helium.service" -O "/lib/systemd/system/helium.service"
+curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/helium.service" -o "/lib/systemd/system/helium.service"
 
 # Update the init
 curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/init.sh" -o "/home/pi/hnt/script/init.sh"
