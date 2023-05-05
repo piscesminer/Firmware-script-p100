@@ -7,7 +7,7 @@
 
 FIRMWARE_VERSION="0.60"
 GATEWAY_RS_PATH="/etc/helium_gateway"
-GATEWAY_REGION="US"
+GATEWAY_REGION="EU"
 GATEWAY_VERSION="v1.0.2"
 GATEWAY_FILE="helium-gateway-1.0.2-armv7-unknown-linux-musleabihf.tar.gz"
 DISTRIB_DATE="2023.04.14"
