@@ -1,8 +1,8 @@
 {
-    "version":0.60,
+    "version":0.63,
     "docker_version":"gateway_mfr_v1.00",
     "heliium_latest":{
-        "version":0.60,
+        "version":0.63,
         "docker version":"gateway_mfr_v1.00"
     }
 }
