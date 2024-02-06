@@ -5,12 +5,12 @@
 # Exit with error if some command fails
 # set -e
 
-FIRMWARE_VERSION="0.62"
+FIRMWARE_VERSION="0.63"
 GATEWAY_RS_PATH="/etc/helium_gateway"
 GATEWAY_REGION="EU"
-GATEWAY_VERSION="v1.1.1"
-GATEWAY_FILE="helium-gateway-1.1.1-armv7-unknown-linux-musleabihf.tar.gz"
-DISTRIB_DATE="2023.08.17"
+GATEWAY_VERSION="v1.3.0"
+GATEWAY_FILE="helium-gateway-1.3.0-armv7-unknown-linux-musleabihf.tar.gz"
+DISTRIB_DATE="2023.10.26"
 echo "update $FIRMWARE_VERSION"
 
 if [[ $EUID -ne 0 ]]; then
@@ -62,7 +62,7 @@ curl -Lf "https://pisces-firmware.sidcloud.cn/$FIRMWARE_VERSION/init.sh" -o "/ho
 echo "Helium_gateway running and updated"
 
 # Update the lsb_release file
-echo "DISTRIB_RELEASE=2023.03.30" | sudo tee /etc/lsb_release
+echo "DISTRIB_RELEASE=2023.10.26" | sudo tee /etc/lsb_release
 wait
 echo "version update"
 wait
